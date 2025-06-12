@@ -1,0 +1,19 @@
+# provisioner.yaml
+apiVersion: karpenter.sh/v1beta1
+kind: Provisioner
+metadata:
+  name: default
+spec:
+  requirements:
+    - key: "karpenter.k8s.aws/instance-category"
+      operator: In
+      values: ["t", "m"]
+    - key: "karpenter.k8s.aws/arch"
+      operator: In
+      values: ["arm64", "amd64"]
+  limits:
+    resources:
+      cpu: "1000"
+  providerRef:
+    name: default-arm64
+  ttlSecondsAfterEmpty: 30

@@ -1,0 +1,16 @@
+# ec2nodeclass-arm64.yaml
+apiVersion: karpenter.k8s.aws/v1beta1
+kind: EC2NodeClass
+metadata:
+  name: default-arm64
+spec:
+  amiFamily: AL2
+  subnetSelectorTerms:
+    - tags:
+        Name: "innovate-eks-public-*"
+  securityGroupSelectorTerms:
+    - tags:
+        Name: "innovate-eks-cluster-sg"
+  instanceProfile: innovate-cluster-karpenter-instance-profile
+  tags:
+    karpenter.sh/discovery: innovate-cluster
